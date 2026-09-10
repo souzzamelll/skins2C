@@ -1,0 +1,1319 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkinTrade — Troque skin, troque de estilo</title>
+
+  <style>
+    :root {
+      --blue: #1976ff;
+      --dark: #07152f;
+      --panel: #0d2045;
+      --panel2: #102a58;
+      --text: #eef6ff;
+      --muted: #9db4d7;
+      --line: rgba(145,190,255,.16);
+      --green: #4ade80;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(
+          circle at 80% 0%,
+          #123b7b 0,
+          #07152f 38%,
+          #040b1a 100%
+        );
+      color: var(--text);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(4,11,26,.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 22px;
+    }
+
+    .brand img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+    }
+
+    .brand span {
+      color: #61a8ff;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 22px;
+      margin-left: auto;
+      color: #bfd0ea;
+      font-weight: 700;
+    }
+
+    .navlinks a:hover {
+      color: white;
+    }
+
+    .loginBtn {
+      border: 1px solid #408eff;
+      background: #1474ff;
+      padding: 10px 17px;
+      border-radius: 10px;
+      font-weight: 800;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      padding: 66px 0 44px;
+    }
+
+    .heroGrid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: #6eb2ff;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: .95;
+      margin: 12px 0 18px;
+    }
+
+    .hero h1 span {
+      color: #3187ff;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 650px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    .primary,
+    .secondary {
+      padding: 13px 19px;
+      border-radius: 12px;
+      font-weight: 900;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: linear-gradient(135deg,#2385ff,#1558d9);
+      color: white;
+      box-shadow: 0 12px 30px rgba(25,118,255,.25);
+    }
+
+    .secondary {
+      background: #0b1d3c;
+      color: #d9e8ff;
+      border: 1px solid var(--line);
+    }
+
+    .heroLogo {
+      background: linear-gradient(
+        145deg,
+        rgba(29,116,255,.16),
+        rgba(255,255,255,.02)
+      );
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 20px;
+      box-shadow: 0 25px 70px rgba(0,0,0,.3);
+    }
+
+    .heroLogo img {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+    }
+
+    /* ================= SEÇÕES ================= */
+
+    section {
+      padding: 42px 0;
+    }
+
+    .sectionHead {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .sectionHead h2 {
+      font-size: 32px;
+      margin: 0;
+    }
+
+    .sectionHead p {
+      color: var(--muted);
+      margin: 6px 0 0;
+    }
+
+    /* ================= JOGOS ================= */
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 20px;
+    }
+
+    .game {
+      padding: 24px;
+      border-radius: 18px;
+      background: linear-gradient(145deg,#102b59,#091a38);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game:after {
+      content: '';
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      right: -70px;
+      top: -70px;
+      background: rgba(49,135,255,.16);
+    }
+
+    .gameTop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .gameIcon {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 900;
+      background: #0a1832;
+      border: 1px solid #2d6dc2;
+    }
+
+    .game h3 {
+      font-size: 24px;
+      margin: 18px 0 7px;
+    }
+
+    .game p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: #123c77;
+      color: #9dcbff;
+      font-weight: 800;
+    }
+
+    /* ================= FILTROS ================= */
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .filter {
+      padding: 9px 13px;
+      border-radius: 9px;
+      background: #0a1a36;
+      color: #abc2df;
+      border: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .filter.active,
+    .filter:hover {
+      background: #1675ff;
+      color: white;
+      border-color: #1675ff;
+    }
+
+    .search {
+      flex: 1;
+      min-width: 220px;
+      padding: 10px 13px;
+      border-radius: 9px;
+      border: 1px solid var(--line);
+      background: #08172f;
+      color: white;
+      outline: none;
+    }
+
+    /* ================= CARDS ================= */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: #0b1d3b;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #317ff0;
+    }
+
+    .skinArt {
+      height: 150px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(
+        135deg,
+        #12366b,
+        #07162f
+      );
+      font-size: 50px;
+    }
+
+    .cardBody {
+      padding: 14px;
+    }
+
+    .cardBody h3 {
+      font-size: 16px;
+      margin: 0 0 7px;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .price {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 900;
+    }
+
+    .price b {
+      color: #7ab8ff;
+    }
+
+    .buy {
+      background: #126df0;
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .stock {
+      color: var(--green);
+      font-size: 11px;
+    }
+
+    /* ================= MODAL ================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      display: none;
+      place-items: center;
+      z-index: 50;
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: grid;
+    }
+
+    .modalBox {
+      width: min(430px,100%);
+      background: #0b1d3b;
+      border: 1px solid #2a65aa;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 30px 90px #000;
+    }
+
+    .modalBox h2 {
+      margin-top: 0;
+    }
+
+    .modalBox input {
+      width: 100%;
+      padding: 12px;
+      margin: 7px 0;
+      border-radius: 9px;
+      border: 1px solid var(--line);
+      background: #07152f;
+      color: white;
+    }
+
+    .close {
+      float: right;
+      background: none;
+      border: 0;
+      color: #9db4d7;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .formBtn {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .switch {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    .switch a {
+      color: #61a8ff;
+      font-weight: 800;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 30px;
+      padding: 28px 0;
+      color: #8fa7c9;
+    }
+
+    .footerInner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* ================= RESPONSIVO ================= */
+
+    @media(max-width:850px) {
+
+      .heroGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .navlinks {
+        display: none;
+      }
+    }
+
+    @media(max-width:520px) {
+
+      .games,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .brand span {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header>
+    <div class="container nav">
+
+      <a class="brand" href="#inicio">
+
+        <!-- LOGO DO SITE -->
+        <img
+          src="./img/9b491fe4-79fc-4afd-ad8c-af2c750224e3.png"
+          alt="Logo SkinTrade"
+        >
+
+        <span>SkinTrade</span>
+
+      </a>
+
+      <nav class="navlinks">
+        <a href="#jogos">Jogos</a>
+        <a href="#skins">Skins</a>
+        <a href="#armas">Armas</a>
+      </nav>
+
+      <button
+        class="loginBtn"
+        onclick="openModal('login')"
+      >
+        Entrar
+      </button>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+
+    <section
+      class="hero"
+      id="inicio"
+    >
+
+      <div class="container heroGrid">
+
+        <div>
+
+          <div class="eyebrow">
+            Marketplace de skins
+          </div>
+
+          <h1>
+            Troque skin.<br>
+            <span>Troque de estilo.</span>
+          </h1>
+
+          <p>
+            Encontre skins e armas para seus jogos favoritos,
+            compare itens e monte sua coleção.
+            Um espaço simples, divertido e feito para
+            a comunidade gamer.
+          </p>
+
+          <div class="actions">
+
+            <a
+              class="primary"
+              href="#skins"
+            >
+              Explorar skins
+            </a>
+
+            <a
+              class="secondary"
+              href="#jogos"
+            >
+              Ver jogos
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOGO GRANDE -->
+
+        <div class="heroLogo">
+
+          <img
+            src="./img/9b491fe4-79fc-4afd-ad8c-af2c750224e3.png"
+            alt="SkinTrade — Troque skin troque de estilo"
+          >
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= JOGOS ================= -->
+
+    <section id="jogos">
+
+      <div class="container">
+
+        <div class="sectionHead">
+
+          <div>
+
+            <h2>
+              Escolha seu jogo
+            </h2>
+
+            <p>
+              Comece por uma das categorias disponíveis.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="games">
+
+          <!-- JOGO 1 -->
+
+          <article class="game">
+
+            <div class="gameTop">
+
+              <div class="gameIcon">
+                CS
+              </div>
+
+              <span class="tag">
+                SKINS + ARMAS
+              </span>
+
+            </div>
+
+            <h3>
+              Counter-Strike 2
+            </h3>
+
+            <p>
+              Facas, rifles, pistolas e skins clássicas
+              para personalizar seu inventário.
+            </p>
+
+            <button
+              class="primary"
+              onclick="filterGame('CS2')"
+            >
+              Ver itens do CS2
+            </button>
+
+          </article>
+
+
+          <!-- JOGO 2 -->
+
+          <article class="game">
+
+            <div class="gameTop">
+
+              <div class="gameIcon">
+                V
+              </div>
+
+              <span class="tag">
+                SKINS + ARMAS
+              </span>
+
+            </div>
+
+            <h3>
+              VALORANT
+            </h3>
+
+            <p>
+              Explore coleções, skins de armas e itens
+              visuais para seus equipamentos.
+            </p>
+
+            <button
+              class="primary"
+              onclick="filterGame('VALORANT')"
+            >
+              Ver itens do VALORANT
+            </button>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= SKINS ================= -->
+
+    <section id="skins">
+
+      <div class="container">
+
+        <div class="sectionHead">
+
+          <div>
+
+            <h2>
+              Skins em destaque
+            </h2>
+
+            <p>
+              Itens demonstrativos para a vitrine do site.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="filters">
+
+          <input
+            class="search"
+            id="search"
+            placeholder="Pesquisar skin ou arma..."
+            oninput="render()"
+          >
+
+          <button
+            class="filter active"
+            data-game="TODOS"
+            onclick="filterGame('TODOS')"
+          >
+            Todos
+          </button>
+
+          <button
+            class="filter"
+            data-game="CS2"
+            onclick="filterGame('CS2')"
+          >
+            CS2
+          </button>
+
+          <button
+            class="filter"
+            data-game="VALORANT"
+            onclick="filterGame('VALORANT')"
+          >
+            VALORANT
+          </button>
+
+        </div>
+
+
+        <div
+          class="grid"
+          id="items"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= ARMAS ================= -->
+
+    <section id="armas">
+
+      <div class="container">
+
+        <div class="sectionHead">
+
+          <div>
+
+            <h2>
+              Armas & equipamentos
+            </h2>
+
+            <p>
+              Uma área pronta para você ampliar o catálogo.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="grid">
+
+
+          <article class="card">
+
+            <div class="skinArt">
+              🔫
+            </div>
+
+            <div class="cardBody">
+
+              <h3>
+                Rifle Neon
+              </h3>
+
+              <div class="meta">
+                Skin demonstrativa • CS2
+              </div>
+
+              <div class="price">
+
+                <b>
+                  R$ 89,90
+                </b>
+
+                <span class="stock">
+                  ● disponível
+                </span>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <article class="card">
+
+            <div class="skinArt">
+              🗡️
+            </div>
+
+            <div class="cardBody">
+
+              <h3>
+                Faca Azul
+              </h3>
+
+              <div class="meta">
+                Skin demonstrativa • CS2
+              </div>
+
+              <div class="price">
+
+                <b>
+                  R$ 129,90
+                </b>
+
+                <span class="stock">
+                  ● disponível
+                </span>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <article class="card">
+
+            <div class="skinArt">
+              ⚡
+            </div>
+
+            <div class="cardBody">
+
+              <h3>
+                Vandal Elétrica
+              </h3>
+
+              <div class="meta">
+                Skin demonstrativa • VALORANT
+              </div>
+
+              <div class="price">
+
+                <b>
+                  R$ 79,90
+                </b>
+
+                <span class="stock">
+                  ● disponível
+                </span>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <article class="card">
+
+            <div class="skinArt">
+              ✨
+            </div>
+
+            <div class="cardBody">
+
+              <h3>
+                Phantom Cristal
+              </h3>
+
+              <div class="meta">
+                Skin demonstrativa • VALORANT
+              </div>
+
+              <div class="price">
+
+                <b>
+                  R$ 74,90
+                </b>
+
+                <span class="stock">
+                  ● disponível
+                </span>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="container footerInner">
+
+      <div>
+        <strong>SkinTrade</strong>
+        — Troque skin, troque de estilo.
+      </div>
+
+      <div>
+        Projeto demonstrativo • 2 jogos disponíveis
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- ================= LOGIN ================= -->
+
+  <div
+    class="modal"
+    id="modal"
+  >
+
+    <div class="modalBox">
+
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+      <h2 id="modalTitle">
+        Entrar
+      </h2>
+
+      <form
+        onsubmit="
+          event.preventDefault();
+          alert('Formulário demonstrativo enviado!');
+          closeModal();
+        "
+      >
+
+        <input
+          type="email"
+          placeholder="E-mail"
+          required
+        >
+
+        <input
+          type="password"
+          placeholder="Senha"
+          minlength="8"
+          required
+        >
+
+        <button
+          class="primary formBtn"
+          id="formButton"
+        >
+          Entrar
+        </button>
+
+      </form>
+
+      <div class="switch">
+
+        <span id="switchText">
+          Ainda não tem conta?
+        </span>
+
+        <a
+          href="#"
+          onclick="toggleForm();return false"
+          id="switchLink"
+        >
+          Criar conta
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    const items = [
+
+      {
+        name: 'AK-47 Azul Royal',
+        game: 'CS2',
+        type: 'Rifle',
+        price: 'R$ 59,90',
+        icon: '🔵'
+      },
+
+      {
+        name: 'AWP Horizonte',
+        game: 'CS2',
+        type: 'Sniper',
+        price: 'R$ 94,90',
+        icon: '🌌'
+      },
+
+      {
+        name: 'Karambit Safira',
+        game: 'CS2',
+        type: 'Faca',
+        price: 'R$ 149,90',
+        icon: '🗡️'
+      },
+
+      {
+        name: 'Glock Onda',
+        game: 'CS2',
+        type: 'Pistola',
+        price: 'R$ 39,90',
+        icon: '💠'
+      },
+
+      {
+        name: 'Vandal Nebulosa',
+        game: 'VALORANT',
+        type: 'Rifle',
+        price: 'R$ 84,90',
+        icon: '🌠'
+      },
+
+      {
+        name: 'Phantom Glacial',
+        game: 'VALORANT',
+        type: 'Rifle',
+        price: 'R$ 79,90',
+        icon: '❄️'
+      },
+
+      {
+        name: 'Operator Eclipse',
+        game: 'VALORANT',
+        type: 'Sniper',
+        price: 'R$ 99,90',
+        icon: '🌙'
+      },
+
+      {
+        name: 'Sheriff Safira',
+        game: 'VALORANT',
+        type: 'Pistola',
+        price: 'R$ 49,90',
+        icon: '💎'
+      }
+
+    ];
+
+
+    let current = 'TODOS';
+
+
+    function render() {
+
+      const q =
+        document
+          .getElementById('search')
+          .value
+          .toLowerCase();
+
+
+      const list = items.filter(x =>
+
+        (current === 'TODOS' || x.game === current)
+
+        &&
+
+        (`${x.name} ${x.game} ${x.type}`)
+          .toLowerCase()
+          .includes(q)
+
+      );
+
+
+      document.getElementById('items').innerHTML =
+
+        list.map(x => `
+
+          <article class="card">
+
+            <div class="skinArt">
+              ${x.icon}
+            </div>
+
+            <div class="cardBody">
+
+              <h3>
+                ${x.name}
+              </h3>
+
+              <div class="meta">
+                ${x.type} • ${x.game}
+              </div>
+
+              <div class="price">
+
+                <b>
+                  ${x.price}
+                </b>
+
+                <button
+                  class="buy"
+                  onclick="alert('Item demonstrativo: ${x.name}')"
+                >
+                  Ver item
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        `).join('')
+
+
+        ||
+
+        '<p style="color:#9db4d7">Nenhum item encontrado.</p>';
+
+    }
+
+
+    function filterGame(game) {
+
+      current = game;
+
+      document
+        .querySelectorAll('.filter')
+        .forEach(b =>
+
+          b.classList.toggle(
+            'active',
+            b.dataset.game === game
+          )
+
+        );
+
+
+      document
+        .getElementById('skins')
+        .scrollIntoView({
+          behavior: 'smooth'
+        });
+
+
+      render();
+
+    }
+
+
+    /* ================= LOGIN / CADASTRO ================= */
+
+    let mode = 'login';
+
+
+    function openModal(m) {
+
+      mode = m;
+
+      updateModal();
+
+      document
+        .getElementById('modal')
+        .classList.add('show');
+
+    }
+
+
+    function closeModal() {
+
+      document
+        .getElementById('modal')
+        .classList.remove('show');
+
+    }
+
+
+    function toggleForm() {
+
+      mode =
+        mode === 'login'
+          ? 'register'
+          : 'login';
+
+      updateModal();
+
+    }
+
+
+    function updateModal() {
+
+      const reg =
+        mode === 'register';
+
+
+      document
+        .getElementById('modalTitle')
+        .textContent =
+          reg
+            ? 'Criar conta'
+            : 'Entrar';
+
+
+      document
+        .getElementById('formButton')
+        .textContent =
+          reg
+            ? 'Cadastrar'
+            : 'Entrar';
+
+
+      document
+        .getElementById('switchText')
+        .textContent =
+          reg
+            ? 'Já tem conta?'
+            : 'Ainda não tem conta?';
+
+
+      document
+        .getElementById('switchLink')
+        .textContent =
+          reg
+            ? 'Entrar'
+            : 'Criar conta';
+
+    }
+
+
+    document
+      .getElementById('modal')
+      .addEventListener(
+        'click',
+        e => {
+
+          if (
+            e.target.id === 'modal'
+          ) {
+            closeModal();
+          }
+
+        }
+      );
+
+
+    /* Carrega os itens */
+
+    render();
+
+  </script>
+
+</body>
+</html>
